@@ -12,8 +12,8 @@ export class MoviesController {
   }
 
   @Get("search") //  '/'가 없어도 동작 
-  search(@Query("year") searchingYear: string) {
-    return `We are search for a movie made after: ${searchingYear}`;
+  search(@Query("year") searchingYear: string): Movie | Movie[] {
+    return this.moviesService.search(searchingYear);
   }
 
   @Get("/:id")
@@ -32,11 +32,7 @@ export class MoviesController {
   }
 
   @Patch("/:id")
-  path(@Param("id") movieId: string, @Body() updateData: { name: string, director: string }) {
-    console.log(updateData);
-    return {
-      updateMovie: movieId,
-      ... updateData,
-    };
+  path(@Param("id") movieId: string, @Body() updateData: Movie) {
+    return this.moviesService.update(movieId, updateData);
   }
 }
