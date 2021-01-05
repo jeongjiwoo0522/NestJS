@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
 class CreateMovieDto { // data transfer object 
   @IsString()
@@ -7,6 +7,7 @@ class CreateMovieDto { // data transfer object
   @IsNumber()
   public readonly year: number;
   
+  @IsOptional()
   @IsString({ each: true })
   public readonly genres: string[];
 }
