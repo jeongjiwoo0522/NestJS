@@ -1,10 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Movie } from './entities/movie.entitiy';
+import { MoviesService } from './movies.service';
 
 @Controller('movies')
 export class MoviesController {
+  constructor(private readonly moviesService: MoviesService) {}
+
   @Get()
-  getAll() {
-    return "This will return all movies";
+  getAll(): Movie[] {
+    return this.moviesService.getAll();
   }
 
   @Get("search") //  '/'가 없어도 동작
