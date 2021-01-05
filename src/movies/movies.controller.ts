@@ -11,25 +11,24 @@ export class MoviesController {
     return this.moviesService.getAll();
   }
 
-  @Get("search") //  '/'가 없어도 동작
+  @Get("search") //  '/'가 없어도 동작 
   search(@Query("year") searchingYear: string) {
     return `We are search for a movie made after: ${searchingYear}`;
   }
 
   @Get("/:id")
-  getOne(@Param("id") movieId: string) {
-    return `This will return one movies with the id: ${movieId}`;
+  getOne(@Param("id") movieId: string): Movie {
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
-  create(@Body() movieData: { name: string, director: string }) {
-    console.log(movieData.director, movieData.name);
-    return movieData;
+  create(@Body() movieData: Movie) {
+    return this.moviesService.create(movieData);
   }
 
   @Delete("/:id") 
   remove(@Param("id") movieId: string) {
-    return `This will delete a movie with the id: ${movieId}`;
+    return this.moviesService.deleteOne(movieId);
   }
 
   @Patch("/:id")

@@ -12,4 +12,16 @@ export class MoviesService {
   getOne(id: string): Movie {
     return this.movies.find(movie => movie.id === parseInt(id));
   }
+
+  deleteOne(id: string): boolean {
+    this.movies = this.movies.filter(movie => movie.id !== +id);
+    return true;
+  }
+
+  create(movieData) {
+    this.movies.push({
+      id: this.movies.length,
+      ... movieData,
+    });
+  }
 }
