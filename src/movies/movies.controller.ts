@@ -1,10 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
 @Controller('movies')
 export class MoviesController {
   @Get()
   getAll() {
     return "This will return all movies";
+  }
+
+  @Get("search") //  '/'가 없어도 동작
+  search(@Query("year") searchingYear: string) {
+    return `We are search for a movie made after: ${searchingYear}`;
   }
 
   @Get("/:id")
