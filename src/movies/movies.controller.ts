@@ -8,8 +8,8 @@ export class MoviesController {
   }
 
   @Get("/:id")
-  getOne(@Param("id") id: string) {
-    return `This will return one movies with the id: ${id}`;
+  getOne(@Param("id") movieId: string) {
+    return `This will return one movies with the id: ${movieId}`;
   }
 
   @Post()
@@ -19,6 +19,6 @@ export class MoviesController {
 
   @Delete("/:id") 
   remove(@Param("id") movieId: string) {
-    return "This will delete a movie";
+    return `This will delete a movie with the id: ${movieId}`;
   }
 }
