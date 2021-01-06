@@ -1,10 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { CreateMovieDto } from './dto/create-movie.dto';
-import { UpdateMovieDto } from './dto/update-movie.dto';
-import { Movie } from './entities/movie.entitiy';
-import { MoviesService } from './movies.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from "@nestjs/common";
+import { CreateMovieDto } from "./dto/create-movie.dto";
+import { UpdateMovieDto } from "./dto/update-movie.dto";
+import { Movie } from "./entities/movie.entitiy";
+import { MoviesService } from "./movies.service";
 
-@Controller('movies')
+@Controller("movies")
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
@@ -13,7 +22,7 @@ export class MoviesController {
     return this.moviesService.getAll();
   }
 
-  @Get("search") //  '/'가 없어도 동작 
+  @Get("search") //  '/'가 없어도 동작
   search(@Query("year") searchingYear: string): Movie | Movie[] {
     return this.moviesService.search(searchingYear);
   }
@@ -29,7 +38,7 @@ export class MoviesController {
     return this.moviesService.create(movieData);
   }
 
-  @Delete("/:id") 
+  @Delete("/:id")
   remove(@Param("id") movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }

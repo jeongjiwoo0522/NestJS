@@ -5,4 +5,4 @@ class Movie {
   public genres: string[];
 }
 
-export { Movie }
+export { Movie };
