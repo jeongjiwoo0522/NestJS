@@ -1,6 +1,6 @@
-import { MoviesService } from './movies.service';
-import { Test, TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import { MoviesService } from "./movies.service";
+import { Test, TestingModule } from "@nestjs/testing";
+import { NotFoundException } from "@nestjs/common";
 
 describe("MovieService", () => {
   let service: MoviesService;
@@ -25,7 +25,7 @@ describe("MovieService", () => {
       service.create({
         title: "test",
         genres: ["test"],
-        year: 2020
+        year: 2020,
       });
       const movie = service.getOne(0);
       expect(movie).toBeDefined();
@@ -35,7 +35,7 @@ describe("MovieService", () => {
     it("should throw 404 error", () => {
       try {
         service.getOne(0);
-      } catch(err) {
+      } catch (err) {
         expect(err).toBeInstanceOf(NotFoundException);
         expect(err.message).toEqual("Movie with ID 0 not found");
       }
@@ -47,20 +47,33 @@ describe("MovieService", () => {
       service.create({
         title: "test",
         genres: ["test"],
-        year: 2020
+        year: 2020,
       });
       const beforeDelete = service.getAll().length;
       service.deleteOne(0);
       const afterDelete = service.getAll().length;
       expect(afterDelete).toBeLessThan(beforeDelete);
-    });  
+    });
   });
   it("should return a 404 error", () => {
     try {
       service.deleteOne(0);
-    } catch(err) {
+    } catch (err) {
       expect(err).toBeInstanceOf(NotFoundException);
       expect(err.message).toEqual("Movie with ID 0 not found");
     }
+  });
+
+  describe("create", () => {
+    it("should craete a movie", () => {
+      const beforeCreate = service.getAll().length;
+      service.create({
+        title: "test",
+        genres: ["test"],
+        year: 2020,
+      });
+      const afterCreate = service.getAll().length;
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
   });
 });
