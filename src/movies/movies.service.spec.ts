@@ -21,7 +21,7 @@ describe("MovieService", () => {
   });
 
   describe("getOne", () => {
-    it("sould return a movie", () => {
+    it("should return a movie", () => {
       service.create({
         title: "test",
         genres: ["test"],
@@ -32,7 +32,7 @@ describe("MovieService", () => {
       expect(movie.id).toEqual(0);
     });
 
-    it("sould throw 404 error", () => {
+    it("should throw 404 error", () => {
       try {
         service.getOne(0);
       } catch(err) {
@@ -40,5 +40,27 @@ describe("MovieService", () => {
         expect(err.message).toEqual("Movie with ID 0 not found");
       }
     });
+  });
+
+  describe("deleteOne", () => {
+    it("should delete a movie", () => {
+      service.create({
+        title: "test",
+        genres: ["test"],
+        year: 2020
+      });
+      const beforeDelete = service.getAll().length;
+      service.deleteOne(0);
+      const afterDelete = service.getAll().length;
+      expect(afterDelete).toBeLessThan(beforeDelete);
+    });  
+  });
+  it("should return a 404 error", () => {
+    try {
+      service.deleteOne(0);
+    } catch(err) {
+      expect(err).toBeInstanceOf(NotFoundException);
+      expect(err.message).toEqual("Movie with ID 0 not found");
+    }
   });
 });
