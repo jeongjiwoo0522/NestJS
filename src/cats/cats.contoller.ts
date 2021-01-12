@@ -2,20 +2,24 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   HttpCode,
   Redirect,
   Param,
   Body,
-  Put,
+  UseFilters,
 } from "@nestjs/common";
 import { CreateCatDto } from "./dto/create-cats.dto";
 import { UpdateCatsDto } from "./dto/update-cats.dto";
+import { ForbiddenException } from "../exceptions/forbidden";
+import { HttpExceptionFilter } from "../exceptions/http-exception.filter";
 
 @Controller("cats")
 export class CatsController {
   @Get()
+  @UseFilters(new HttpExceptionFilter())
   findAll() {
-    return "This action return all cats";
+    throw new ForbiddenException();
   }
   @Post()
   @HttpCode(201)
@@ -33,6 +37,5 @@ export class CatsController {
     };
   }
   @Get("/:id")
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
   findOne(@Param("id") id: number) {}
 }
