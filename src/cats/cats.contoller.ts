@@ -1,4 +1,13 @@
-import { Controller, Get, Post, HttpCode, Redirect, Param, Body, Put } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  HttpCode,
+  Redirect,
+  Param,
+  Body,
+  Put,
+} from "@nestjs/common";
 import { CreateCatDto } from "./dto/create-cats.dto";
 import { UpdateCatsDto } from "./dto/update-cats.dto";
 
@@ -14,20 +23,16 @@ export class CatsController {
     return "This action adds a new cat";
   }
   @Put("/:id")
-  update(@Param("id") id: number, @Body() updateCatDto: UpdateCatsDto) {
-    
-  }
+  update(@Param("id") id: number, @Body() updateCatDto: UpdateCatsDto) {}
   @Get("/redirect")
   @Redirect("/", 301)
   getRedirect() {
-      // redirect by return object (override)
-      return {  
-        statusCode: 301,
-        url: "/"
-      }
+    return {
+      statusCode: 301,
+      url: "/",
+    };
   }
   @Get("/:id")
-  findOne(@Param("id") id: number) {
-
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
+  findOne(@Param("id") id: number) {}
 }
