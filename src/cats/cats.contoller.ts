@@ -8,6 +8,7 @@ import {
   Param,
   Body,
   UseFilters,
+  ParseIntPipe,
 } from "@nestjs/common";
 import { CreateCatDto } from "./dto/create-cats.dto";
 import { UpdateCatsDto } from "./dto/update-cats.dto";
@@ -27,7 +28,7 @@ export class CatsController {
     return "This action adds a new cat";
   }
   @Put("/:id")
-  update(@Param("id") id: number, @Body() updateCatDto: UpdateCatsDto) {}
+  update(@Param("id", ParseIntPipe) id: number, @Body() updateCatDto: UpdateCatsDto) {}
   @Get("/redirect")
   @Redirect("/", 301)
   getRedirect() {
