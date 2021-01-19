@@ -2,6 +2,11 @@ import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 
+import dotenv from "dotenv"
+import path from "path";
+
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
